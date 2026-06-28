@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RONIC｜澳洲中小企业 AI 数字员工与 AI 盈利顾问</title>
+    <meta name="description" content="RONIC 帮助澳洲中小企业通过 AI 数字员工实现降本增效、降低人工成本、提高工作效率和扩大收入。0 开发费用，3 天免费 Demo，预约 1 小时免费 AI 盈利咨询。">
+    <meta name="keywords" content="澳洲中小企业 AI, AI 数字员工，AI 员工，AI 盈利顾问，AI 降本增效，AI 自动化，AI Agent, AI 工作流自动化，AI 邮件处理，AI 文档审核，AI 客户跟进，AI 获客，AI 企业顾问，AI 助理，澳洲 AI 咨询，Melbourne AI consultant, AI for Australian SMEs, AI business automation">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #0f172a; /* 深蓝 */
+            --accent-color: #2563eb; /* 电光蓝 */
+            --accent-hover: #1d4ed8;
+            --secondary-color: #064e3b; /* 墨绿 */
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            background-color: var(--bg-white);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            line-height: 1.2;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+        a {
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-bg {
+            background-color: var(--bg-light);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mb-12 { margin-bottom: 3rem; }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            margin-left: 10px;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 160px;
+            padding-bottom: 100px;
+            background: radial-gradient(circle at top right, #eff6ff, #ffffff);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-visual {
+            margin-top: 60px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .ai-role-card {
+            background: white;
+            padding: 15px 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .ai-role-card:nth-child(2) { animation-delay: 0.5s; }
+        .ai-role-card:nth-child(3) { animation-delay: 1s; }
+        .ai-role-card:nth-child(4) { animation-delay: 1.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .icon-box {
+            width: 32px;
+            height: 32px;
+            background: #eff6ff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+        }
+
+        /* Cards Grid */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-color);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Process Steps */
+        .process-step {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table th {
+            background: var(--bg-light);
+            font-size: 1.1rem;
+        }
+
+        .comparison-table th.col-ronic {
+            background: #eff6ff;
+            color: var(--accent-color);
+        }
+
+        .check { color: var(--secondary-color); font-weight: bold; }
+        .cross { color: #ef4444; font-weight: bold; }
+
+        /* FAQ */
+        .faq-item {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            background: #fff;
+        }
+
+        .faq-question:hover {
+            background: #f8fafc;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: #fdfdfd;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 200px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .faq-icon {
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+
+        footer p {
+            color: #94a3b8;
+        }
+
+        footer .logo {
+            color: white;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .btn { width: 100%; margin: 10px 0 0 0; }
+            .btn-outline { margin-left: 0; }
+            .comparison-table { font-size: 0.9rem; }
+            .comparison-table th, .comparison-table td { padding: 15px 10px; }
+            .process-step { flex-direction: column; }
+            .step-number { margin-bottom: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-flex">
+            <div class="logo">RONIC<span>.AI</span></div>
+            <a href="#contact" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.9rem;">免费咨询</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>帮助澳洲中小企业<br>用 AI 降低人工成本、提高效率、扩大收入</h1>
+            <p>RONIC 帮你设计、开发、培训属于你企业自己的 AI 数字员工。<br>0 开发费用，3 天免费 Demo，满意后再正式培训上岗。</p>
+            
+            <div class="cta-group">
+                <a href="#contact" class="btn btn-primary">预约 1 小时免费 AI 盈利咨询</a>
+                <a href="#solution" class="btn btn-outline">看看 AI 员工能做什么</a>
+            </div>
+
+            <div class="hero-visual">
+                <div class="ai-role-card">
+                    <div class="icon-box">📧</div>
+                    <span>AI 邮件专员</span>
+                </div>
+                <div class="ai-role-card">
+                    <div class="icon-box">📄</div>
+                    <span>AI 文档审核员</span>
+                </div>
+                <div class="ai-role-card">
+                    <div class="icon-box">📈</div>
+                    <span>AI 获客专员</span>
+                </div>
+                <div class="ai-role-card">
+                    <div class="icon-box">🤖</div>
+                    <span>AI 秘书</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pain Points -->
+    <section class="section section-bg">
+        <div class="container">
+            <div class="text-center mb-12">
+                <h2>你的企业真的需要更多员工吗？</h2>
+                <p class="mb-4">很多中小企业不是缺软件，而是缺“完成工作的能力”。</p>
+            </div>
+            
+            <div class="grid-4">
+                <div class="card">
+                    <div class="card-icon">💰</div>
+                    <h3>人工成本高</h3>
+                    <p>员工工资、培训、流失和管理成本不断上升，压缩利润空间。</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⏳</div>
+                    <h3>重复工作多</h3>
+                    <p>邮件、文件、报表、录入每天都在消耗团队精力，无法聚焦核心业务。</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🤯</div>
+                    <h3>老板被琐事拖住</h3>
+                    <p>太多小决定、小任务影响真正重要的经营决策和战略规划。</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📉</div>
+                    <h3>获客效率不足</h3>
+                    <p>内容、广告、客户跟进没有系统化执行，增长缓慢。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution -->
+    <section id="solution" class="section">
+        <div class="container">
+            <div class="text-center mb-12">
+                <h2>RONIC 帮你招聘 AI 数字员工</h2>
+                <p class="mb-4">AI 数字员工不是普通聊天机器人，它是被训练去完成具体岗位工作的专业助手。</p>
+                <p style="font-weight: 600; color: var(--primary-color);">你的企业不一定需要更多真人员工，但一定需要更多“完成工作的能力”。</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon">👩‍💼</div>
+                    <h3>AI 秘书</h3>
+                    <p>每天汇报重点工作，过滤老板需要处理的事项，安排日程。</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📧</div>
+                    <h3>AI 邮件专员</h3>
+                    <p>读取邮件，整理信息，识别附件，自动生成待办任务。</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📝</div>
+                    <h3>AI 文档审核员</h3>
+                    <p>检查资料是否齐全，标记风险点，生成详细的审核报告。</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🤝</div>
+                    <h3>AI 客户跟进员</h3>
+                    <p>准备补件提醒、客户回复草稿和自动化跟进消息。</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🚀</div>
+                    <h3>AI 获客专员</h3>
+                    <p>生成广告内容、社媒帖子、邮件营销文案和销售脚本。</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <h3>AI 运营报告员</h3>
+                    <p>每天总结工作进度、潜在风险和下一步行动建议。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Proposition -->
+    <section class="section section-bg">
+        <div class="container">
+            <div class="text-center mb-12">
+                <h2>我们关注的不是 AI 本身，而是企业结果</h2>
+                <p>AI 不是目的。利润增长和运营效率才是目的。</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="card text-center">
+                    <div class="card-icon">💸</div>
+                    <h3>降本</h3>
+                    <p>让 AI 接手重复行政、文件、邮件、整理、报告等工作，直接降低人工成本。</p>
+                </div>
+                <div class="card text-center">
+                    <div class="card-icon">⚡</div>
+                    <h3>增效</h3>
+                    <p>让员工从重复劳动中解放出来，把时间花在客户、销售和专业判断上。</p>
+                </div>
+                <div class="card text-center">
+                    <div class="card-icon">📈</div>
+                    <h3>增长</h3>
+                    <p>通过 AI 内容、获客、跟进和销售辅助，显著提高询盘和成交机会。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section class="section">
+        <div class="container">
+            <div class="text-center mb-12">
+                <h2>从免费咨询到 AI 员工正式上岗，只需 5 步</h2>
+            </div>
+
+            <div class="grid-2">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h3>免费 1 小时 AI 盈利咨询</h3>
+                        <p>了解你的业务、团队、成本、流程和最痛的重复工作。</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h3>制定 AI 员工策略</h3>
+                        <p>找出第一位最值得招聘的 AI 员工，明确节省成本和提升效率的目标。</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h3>3 天免费工作台 Demo</h3>
+                        <p>免费开发可演示的 AI 工作台，让你亲眼看到 AI 如何真正工作。</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div>
+                        <h3>培训 AI 员工</h3>
+                        <p>根据你的流程、规则、文件、语气要求进行深度训练。</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div>
+                        <h3>1 周试工 + 正式入职</h3>
+                        <p>真实场景试工优化，确认后按月支付服务费，持续维护升级。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries -->
+    <section class="section section-bg">
+        <div class="container">
+            <div class="text-center mb-12">
+                <h2>适合重复工作多、人工成本高、流程清晰的行业</h2>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>⚖️ 律师 / 移民代理</h3>
+                    <p>文件审核、客户补件、案件进度跟踪、律师复核报告生成。</p>
+                </div>
+                <div class="card">
+                    <h3>📊 会计事务所</h3>
+                    <p>邮件整理、客户资料收集、银行流水分类、BAS 支持、客户提醒。</p>
+                </div>
+                <div class="card">
+                    <h3>🏪 零售 / 批发</h3>
+                    <p>产品资料管理、库存提醒、供应商文件处理、报价与订单流程。</p>
+                </div>
+                <div class="card">
+                    <h3>🛒 电商企业</h3>
+                    <p>产品文案撰写、广告素材生成、社媒内容、客户咨询自动回复。</p>
+                </div>
+                <div class="card">
+                    <h3>🏠 房产 / 贷款 / 保险</h3>
+                    <p>客户资料收集、文件合规审核、进度跟进、自动提醒和报告。</p>
+                </div>
+                <div class="card">
+                    <h3>🛠️ 服务型企业</h3>
+                    <p>询盘处理、快速报价、客户跟进、预约管理、内部日报。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cases -->
+    <section class="section">
+        <div class="container">
+            <div class="text-center mb-12">
+                <h2>AI 员工如何改变一天的工作？</h2>
+            </div>
+            <div class="grid-3">
+                <div class="card" style="border-top: 4px solid var(--accent-color);">
+                    <h3>移民律师事务所</h3>
+                    <p><strong>以前：</strong>新人需 2-3 小时检查客户材料。</p>
+                    <p><strong>现在：</strong>AI 文档员工先完成预审，列出缺失文件和风险点。</p>
+                    <p><strong>结果：</strong>律师只做最终复核，效率提升 300%。</p>
+                </div>
+                <div class="card" style="border-top: 4px solid var(--secondary-color);">
+                    <h3>零售 / 批发生意</h3>
+                    <p><strong>以前：</strong>员工花大量时间写文案、处理库存询问。</p>
+                    <p><strong>现在：</strong>AI 运营员工自动生成内容、提醒库存、辅助回复。</p>
+                    <p><strong>结果：</strong>上新速度加快，获客效率显著提升。</p>
+                </div>
+                <div class="card" style="border-top: 4px solid var(--primary-color);">
+                    <h3>会计事务所</h3>
+                    <p><strong>以前：</strong>反复追客户资料、手动整理邮件附件。</p>
+                    <p><strong>现在：</strong>AI 邮件员工读取邮件，识别附件，生成缺失提醒。</p>
+                    <p><strong>结果：</strong>行政沟通减少，资料收集自动化。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="section section-bg">
+        <div class="container">
+            <div class="text-center mb-12">
+                <h2>你不需要再买一个没人会用的软件</h2>
+            </div>
+            <div style="overflow-x: auto;">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>功能对比</th>
+                            <th>普通 AI 工具</th>
+                            <th class="col-ronic">RONIC AI 数字员工</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>学习成本</td>
+                            <td><span class="cross">✕</span> 需要你自己学习</td>
+                            <td><span class="check">✓</span> 开箱即用，无需学习</td>
+                        </tr>
+                        <tr>
+                            <td>业务流程</td>
+                            <td><span class="cross">✕</span> 不懂你的业务</td>
+                            <td><span class="check">✓</span> 深度定制，完全匹配流程</td>
+                        </tr>
+                        <tr>
+                            <td>持续性</td>
+                            <td><span class="cross">✕</span> 每次都要重新写 Prompt</td>
+                            <td><span class="check">✓</span> 7x24 小时持续跟进结果</td>
+                        </tr>
+                        <tr>
+                            <td>集成度</td>
+                            <td><span class="cross">✕</span> 孤立存在</td>
+                            <td><span class="check">✓</span> 接入真实工作流和软件</td>
+                        </tr>
+                        <tr>
+                            <td>最终目标</td>
+                            <td><span class="cross">✕</span> 只是个玩具</td>
+                            <td><span class="check">✓</span> 关注降本增效和收入增长</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section">
+        <div class="container text-center">
+            <h2 class="mb-4">0 开发费用，满意后再让 AI 员工正式上岗</h2>
+            <p class="mb-8" style="max-width: 600px; margin-left: auto; margin-right: auto;">我们降低企业尝试 AI 的门槛。你不需要一开始支付高额开发费。</p>
+            
+            <div class="grid-4 mb-12" style="justify-content: center; display: flex; gap: 20px; flex-wrap: wrap;">
+                <div class="card" style="flex: 1; min-width: 200px;">
+                    <h4>免费咨询</h4>
+                    <p>1 小时深度诊断</p>
+                </div>
+                <div class="card" style="flex: 1; min-width: 200px; border-color: var(--accent-color);">
+                    <h4>免费 Demo</h4>
+                    <p>3 天真实场景演示</p>
+                </div>
+                <div class="card" style="flex: 1; min-width: 200px;">
+                    <h4>按需培训</h4>
+                    <p>确认后支付培训费</p>
+                </div>
+                <div class="card" style="flex: 1; min-width: 200px;">
+                    <h4>月度订阅</h4>
+                    <p>试工后按月付费</p>
+                </div>
+            </div>
+
+            <a href="#contact" class="btn btn-primary">预约免费咨询，估算你的第一位 AI 员工</a>
+        </div>
+    </section>
+
+    <!-- Security -->
+    <section class="section section-bg">
+        <div class="container">
+            <div class="text-center mb-12">
+                <h2>AI 负责准备工作，人负责最终决策</h2>
+                <p>RONIC 的 AI 员工不会替代老板、律师、会计或专业人员做最终判断。</p>
+            </div>
+            <div class="grid-4">
+                <div class="card text-center">
+                    <div class="card-icon">🛡️</div>
+                    <h4>人工复核机制</h4>
+                    <p>Human-in-the-loop，关键步骤需确认</p>
+                </div>
+                <div class="card text-center">
+                    <div class="card-icon">🔒</div>
+                    <h4>数据隔离</h4>
+                    <p>客户数据严格保密，独立存储</p>
+                </div>
+                <div class="card text-center">
+                    <div class="card-icon">📝</div>
+                    <h4>可追踪记录</h4>
+                    <p>所有 AI 操作均有日志可查</p>
+                </div>
+                <div class="card text-center">
+                    <div class="card-icon">🇦🇺</div>
+                    <h4>本地化设计</h4>
+                    <p>专为澳洲企业场景和法律设计</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+        <div class="container" style="max-width: 800px;">
+            <div class="text-center mb-12">
+                <h2>常见问题</h2>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">什么是 AI 数字员工？ <span class="faq-icon">+</span></div>
+                <div class="faq-answer">AI 数字员工不是简单的聊天机器人，而是经过专门训练，能够理解你的业务流程，独立完成特定岗位工作（如邮件处理、文档审核、客户跟进）的智能助手。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">AI 数字员工和 ChatGPT 有什么不同？ <span class="faq-icon">+</span></div>
+                <div class="faq-answer">ChatGPT 是通用工具，需要你每次输入指令；RONIC 的 AI 数字员工是定制化的，它已经学会了你的公司流程、术语和规则，能主动工作并集成到你的软件中。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">RONIC 可以帮我节省多少人工成本？ <span class="faq-icon">+</span></div>
+                <div class="faq-answer">根据行业不同，通常可以替代 0.5 到 2 个全职初级员工的工作量，具体取决于流程的标准化程度。我们在免费咨询中会为你做详细测算。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">AI 可以读取邮件和附件吗？ <span class="faq-icon">+</span></div>
+                <div class="faq-answer">可以。我们的 AI 员工可以安全地连接你的邮箱，读取邮件内容，识别 PDF/Word/Excel 等附件，并提取关键信息生成报告或任务。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">AI 会不会直接替代真人员工？ <span class="faq-icon">+</span></div>
+                <div class="faq-answer">我们的目标是替代“重复性工作”，而不是“人”。AI 处理繁琐事务，让你的真人员工专注于高价值的客户服务、战略决策和创意工作，从而提升整体团队价值。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">3 天 Demo 会做到什么程度？ <span class="faq-icon">+</span></div>
+                <div class="faq-answer">我们会针对你最痛的一个场景（如自动回复询盘或审核合同），搭建一个可运行的原型。你可以亲自测试它的输入输出，看它是否真正理解你的需求。</div>
+            </div>
+             <div class="faq-item">
+                <div class="faq-question">如果 Demo 不满意怎么办？ <span class="faq-icon">+</span></div>
+                <div class="faq-answer">完全免费，没有任何义务。Demo 的目的就是让你零风险验证效果。如果不满意，我们可以调整方向或者终止合作，你不需要支付任何费用。</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section id="contact" class="section section-bg text-center">
+        <div class="container">
+            <h2 class="mb-4">免费找到你企业最值得招聘的第一位 AI 员工</h2>
+            <p class="mb-8" style="max-width: 600px; margin-left: auto; margin-right: auto;">预约 1 小时免费 AI 盈利咨询。我们会帮你判断：你的企业哪里最浪费人工、哪里最适合 AI 接手、第一位 AI 员工应该做什么。</p>
+            <a href="#contact" class="btn btn-primary" style="font-size: 1.2rem; padding: 18px 36px;">预约 1 小时免费 AI 盈利咨询</a>
+            <p style="margin-top: 20px; font-size: 0.9rem;">名额有限，本周仅剩 3 个免费咨询时段</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="logo">RONIC.AI</div>
+            <p>澳洲中小企业 AI 数字员工服务商</p>
+            <p style="margin-top: 20px; font-size: 0.8rem;">&copy; 2024 RONIC. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Close all others
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                
+                // Toggle current
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
