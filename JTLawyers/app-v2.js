@@ -605,6 +605,69 @@ function renderEnquiryDetail(item) {
   </section>`;
 }
 
+function ensureApplicationPack(item) {
+  if (!item.sourceEnquiryId && !item.applicationPack) return null;
+  if (!item.applicationPack) {
+    item.applicationPack = {
+      status: 'not-sent',
+      link: `application-pack-form-v2.html?case=${item.id}`,
+      sentAt: '',
+      submittedAt: '',
+      lawyerNotified: false,
+      documents: [],
+      interactions: [['System', 'Formal application pack link is ready to send to client.', 'Now']]
+    };
+  }
+  return item.applicationPack;
+}
+
+function renderApplicationPack(item) {
+  const pack = ensureApplicationPack(item);
+  if (!pack) return '';
+  const statusLabel = {
+    'not-sent': 'Ready to send',
+    'waiting-client': 'Waiting for client',
+    'submitted': 'AI document check',
+    'needs-lawyer': 'Lawyer intervention required',
+    'ready-lawyer-review': 'Ready for lawyer review',
+    'lawyer-approved': 'Approved for next step'
+  }[pack.status] || 'Application pack';
+  const documents = pack.documents || [];
+  const interactions = pack.interactions || [];
+  const documentHtml = documents.length ? `<div class="document-audit-list">
+    ${documents.map(doc => `<div class="document-audit-item ${doc.status}">
+      <div><strong>${doc.name}</strong><small>${doc.standard}</small></div>
+      <span>${doc.statusLabel}</span>
+      <p>${doc.message}</p>
+    </div>`).join('')}
+  </div>` : '<div class="application-empty">No client documents submitted yet.</div>';
+  const actionHtml = pack.status === 'not-sent' ? `<button class="application-primary" type="button" data-case-action="send-application-pack">Send application form link</button>` :
+    pack.status === 'waiting-client' ? `<button class="application-primary" type="button" data-case-action="demo-client-submit-pack">Demo: client submitted documents</button>` :
+    pack.status === 'submitted' ? `<div class="application-actions"><button type="button" data-case-action="auto-fix-files">Auto-fix file size / format issues</button><button type="button" data-case-action="request-lawyer-intervention">Request lawyer intervention</button></div>` :
+    pack.status === 'needs-lawyer' ? `<button class="application-primary" type="button" data-case-action="approve-doc-pack">Lawyer reviewed · prepare review pack</button>` :
+    pack.status === 'ready-lawyer-review' ? `<button class="application-primary" type="button" data-case-action="approve-doc-pack">Lawyer approves document pack</button>` :
+    '<div class="application-approved">Application pack approved. Case can move to the next preparation stage.</div>';
+  return `<section class="detail-section application-pack-section">
+    <h3>Formal application pack</h3>
+    <div class="application-pack-card">
+      <div class="application-pack-head">
+        <div><strong>${statusLabel}</strong><small>Client form, uploads, AI checks and lawyer review pack</small></div>
+        <span>${pack.status.replaceAll('-', ' ')}</span>
+      </div>
+      <div class="form-link-status">
+        <div><small>Client application form</small><a class="form-link-anchor" href="${pack.link}" target="_blank" rel="noopener">${pack.link}</a></div>
+        <div><small>Current owner</small><strong>${pack.status === 'needs-lawyer' || pack.status === 'ready-lawyer-review' ? (item.responsibleLawyer || 'Helen Wang') : 'AI document team'}</strong></div>
+      </div>
+      ${documentHtml}
+      ${actionHtml}
+      <div class="interaction-timeline">
+        <strong>Client interaction history</strong>
+        ${interactions.map(entry => `<div><span>${entry[0]}</span><p>${entry[1]}</p><em>${entry[2]}</em></div>`).join('')}
+      </div>
+    </div>
+  </section>`;
+}
+
 function renderCaseDetail(item) {
   const stage = stageFor(item.stage);
   const caseInstructions = instructions[item.id] || [];
@@ -619,6 +682,8 @@ function renderCaseDetail(item) {
     <div class="fact"><small>Risk</small><strong>${item.risk}</strong></div>
     <div class="fact"><small>Lawyer</small><strong>${item.responsibleLawyer || item.finalCase?.lawyer || 'Helen Wang'}</strong></div>
   </div>
+
+  ${renderApplicationPack(item)}
 
   <section class="detail-section">
     <h3>AI work in progress</h3>
@@ -741,7 +806,18 @@ function createCaseFromEnquiry(item) {
     finalStrategy: finalCase.strategy || item.strategyDraft?.pathway || '',
     finalPrice: finalCase.price || item.intake.quote,
     responsibleLawyer: finalCase.lawyer || item.intake.lawyer,
-    profile
+    profile,
+    applicationPack: {
+      status: 'not-sent',
+      link: `application-pack-form-v2.html?case=${id}`,
+      sentAt: '',
+      submittedAt: '',
+      lawyerNotified: false,
+      documents: [],
+      interactions: [
+        ['System', 'Case created. Formal application pack link is ready to send to client.', 'Now']
+      ]
+    }
   };
 }
 
@@ -991,6 +1067,59 @@ document.addEventListener('click', event => {
     officeShell.classList.add('detail-collapsed');
     detailToggle.setAttribute('aria-pressed', 'false');
     detailToggle.setAttribute('aria-label', 'Case panel hidden');
+    return;
+  }
+
+  const caseAction = event.target.closest('[data-case-action]');
+  if (caseAction) {
+    const item = cases.find(entry => entry.id === selectedCaseId);
+    const pack = item ? ensureApplicationPack(item) : null;
+    if (!item || !pack) return;
+    const action = caseAction.dataset.caseAction;
+    if (action === 'send-application-pack') {
+      pack.status = 'waiting-client';
+      pack.sentAt = new Date().toISOString();
+      item.next = 'Client application pack';
+      pack.interactions.unshift(['System', 'Formal application form link sent to client. Waiting for client information and uploads.', 'Now']);
+    }
+    if (action === 'demo-client-submit-pack') {
+      pack.status = 'submitted';
+      pack.submittedAt = new Date().toISOString();
+      item.next = 'AI document check';
+      pack.documents = [
+        { name: 'Passport biodata page', status: 'pass', statusLabel: 'Pass', standard: 'Clear colour scan, full page, expiry visible, PDF/JPG under 10MB', message: 'Meets format and visibility requirements.' },
+        { name: 'Passport photo', status: 'fixed', statusLabel: 'Auto-fixed', standard: 'JPG/PNG, under 5MB, readable face image', message: 'Original file was too large. AI compressed the image and kept a clean copy.' },
+        { name: 'Police check', status: 'client-action', statusLabel: 'Client action', standard: 'Official current certificate, all pages, issued within accepted validity window', message: 'Uploaded document appears to be an old version. Client should obtain a current police check from the official issuing authority.' },
+        { name: 'Employment reference', status: 'lawyer-review', statusLabel: 'Lawyer review', standard: 'Employer letterhead, role, duties, dates, hours, supervisor contact and signature', message: 'Duties wording may not match the nominated occupation. Lawyer review recommended.' }
+      ];
+      pack.interactions.unshift(['Client', 'Submitted application form and uploaded 4 document groups.', 'Now']);
+      pack.interactions.unshift(['AI', 'Checked file type, file size, required fields, expiry and obvious content issues.', 'Now']);
+    }
+    if (action === 'auto-fix-files') {
+      pack.documents = pack.documents.map(doc => doc.status === 'fixed' ? { ...doc, status: 'pass', statusLabel: 'Pass', message: 'File size and format fixed automatically. Clean copy saved.' } : doc);
+      pack.status = pack.documents.some(doc => doc.status === 'lawyer-review') ? 'needs-lawyer' : 'ready-lawyer-review';
+      item.review = pack.status === 'needs-lawyer';
+      item.next = pack.status === 'needs-lawyer' ? 'Lawyer document review' : 'Lawyer review pack';
+      pack.interactions.unshift(['AI', 'Automatically fixed file size / format issues and prepared clean copies.', 'Now']);
+      pack.interactions.unshift(['System', 'Client has been told which content issue needs a correct official version.', 'Now']);
+    }
+    if (action === 'request-lawyer-intervention') {
+      pack.status = 'needs-lawyer';
+      item.review = true;
+      item.next = 'Lawyer document review';
+      pack.interactions.unshift(['System', 'Automation could not resolve a content issue. Lawyer intervention requested.', 'Now']);
+    }
+    if (action === 'approve-doc-pack') {
+      pack.status = 'lawyer-approved';
+      pack.lawyerNotified = true;
+      item.stage = Math.max(item.stage, 2);
+      item.review = false;
+      item.next = 'Initial Review';
+      item.done = ['Application pack approved for lawyer review', 'Client uploads checked and organised', ...item.done].slice(0, 6);
+      pack.interactions.unshift(['Lawyer', 'Document pack reviewed and approved. Case can proceed to initial review.', 'Now']);
+    }
+    persistCustomCases();
+    renderAll();
     return;
   }
 

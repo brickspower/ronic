@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JT Lawyers 正式申请资料表</title>
+  <link rel="stylesheet" href="application-pack-form-v2.css" />
+</head>
+<body>
+  <main class="pack-shell">
+    <header class="pack-hero">
+      <div>
+        <div class="brand-mark">JT Lawyers</div>
+        <h1>正式申请资料表</h1>
+        <p>请填写正式申请信息并上传资料。系统会先检查文件格式、大小、清晰度和基础内容，律师会进行最终人工审核。</p>
+      </div>
+      <div class="pack-note"><strong>不会自动递交申请</strong><small>资料仅用于律师准备和审核</small></div>
+    </header>
+
+    <form id="applicationPackForm" class="pack-form">
+      <section class="pack-section">
+        <div class="section-title"><span>01</span><h2>申请人确认信息</h2></div>
+        <div class="field-grid">
+          <label>中文姓名<input required name="chineseName" placeholder="例如：郭林" /></label>
+          <label>英文姓名<input required name="englishName" placeholder="例如：Lincoln Guo" /></label>
+          <label>出生日期<input name="dob" type="date" /></label>
+          <label>当前签证<input name="currentVisa" placeholder="例如：482 / BVA / Offshore" /></label>
+          <label>护照到期日<input name="passportExpiry" type="date" /></label>
+          <label>澳洲地址<input name="address" placeholder="如适用" /></label>
+        </div>
+      </section>
+
+      <section class="pack-section">
+        <div class="section-title"><span>02</span><h2>资料上传标准</h2></div>
+        <div class="upload-standard-list">
+          <div><strong>护照</strong><small>彩色清晰扫描，完整页面，PDF/JPG，10MB 以下</small><input type="file" /></div>
+          <div><strong>证件照</strong><small>JPG/PNG，5MB 以下，正面清晰，系统可自动压缩尺寸</small><input type="file" /></div>
+          <div><strong>无犯罪记录</strong><small>官方当前版本，所有页面齐全，不能上传旧版本</small><input type="file" /></div>
+          <div><strong>工作证明</strong><small>公司抬头、职位、职责、日期、工时、主管联系方式和签名</small><input type="file" /></div>
+        </div>
+      </section>
+
+      <section class="pack-section">
+        <div class="section-title"><span>03</span><h2>补充说明</h2></div>
+        <textarea name="notes" placeholder="请说明任何资料缺失、姓名不一致、签证历史或紧急时间点"></textarea>
+      </section>
+
+      <section class="submit-panel">
+        <label><input type="checkbox" required /> 我确认资料真实，并理解律师会进行最终审核。</label>
+        <button type="submit">提交资料给律师团队</button>
+      </section>
+    </form>
+
+    <section class="success-panel" id="successPanel" hidden>
+      <div class="success-icon">✓</div>
+      <h2>资料已提交</h2>
+      <p>系统会先检查文件格式、大小和基础内容。若文件可自动处理，系统会整理清洁版本；若内容不正确，会通知你如何重新获取正确版本。</p>
+      <a href="index-v2.html">返回 JT Lawyers demo</a>
+    </section>
+  </main>
+  <script src="application-pack-form-v2.js"></script>
+</body>
+</html>
