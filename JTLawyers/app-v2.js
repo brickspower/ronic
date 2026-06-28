@@ -239,6 +239,8 @@ const enquiryRows = document.getElementById('enquiryRows');
 const enquirySearchEl = document.getElementById('enquirySearch');
 const enquiryPanel = document.getElementById('enquiryPanel');
 const enquiryInfoToggle = document.getElementById('enquiryInfoToggle');
+const caseWorkflowPanel = document.getElementById('caseWorkflowPanel');
+const caseInfoToggle = document.getElementById('caseInfoToggle');
 const newEnquiryButton = document.getElementById('newEnquiryButton');
 const newEnquiryModal = document.getElementById('newEnquiryModal');
 const newEnquiryForm = document.getElementById('newEnquiryForm');
@@ -899,6 +901,14 @@ document.addEventListener('click', event => {
       return;
     }
     showView('dashboard');
+    return;
+  }
+
+  if (event.target.id === 'caseInfoToggle' || event.target.closest('#caseInfoToggle')) {
+    const expanded = caseWorkflowPanel.classList.toggle('case-workflow-expanded');
+    caseWorkflowPanel.classList.toggle('case-workflow-collapsed', !expanded);
+    caseInfoToggle.setAttribute('aria-expanded', String(expanded));
+    caseInfoToggle.setAttribute('aria-label', expanded ? 'Hide case workflow summary' : 'Show case workflow summary');
     return;
   }
 

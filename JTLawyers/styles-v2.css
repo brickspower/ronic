@@ -552,3 +552,20 @@ h1 { font-size: 24px; margin: 0; font-weight: 660; letter-spacing: -0.02em; }
 .final-confirm-form textarea:focus { border-color: rgba(15,155,142,.55); box-shadow: 0 0 0 4px rgba(15,155,142,.1); background: #fff; }
 .final-confirm-form button { border-radius: 11px; padding: 10px 12px; background: var(--teal); color: #fff; cursor: pointer; font-weight: 650; }
 @media (max-width: 680px) { .decision-choice-grid { grid-template-columns: 1fr; } }
+
+.case-workflow-panel { padding: 16px 18px; margin-bottom: 14px; }
+.case-workflow-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: center; margin-bottom: 0; }
+.case-workflow-head > div:first-child { min-width: 0; }
+.case-workflow-head p { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.case-workflow-actions { display: flex; align-items: center; justify-content: flex-end; gap: 8px; white-space: nowrap; }
+.case-workflow-actions .ghost-btn { height: 38px; padding: 0 14px; border-radius: 12px; display: inline-flex; align-items: center; }
+.case-workflow-body { overflow: hidden; transition: max-height .24s ease, opacity .18s ease, margin-top .2s ease; }
+.case-workflow-collapsed .case-workflow-body { max-height: 0; opacity: 0; margin-top: 0; pointer-events: none; }
+.case-workflow-expanded .case-workflow-body { max-height: 560px; opacity: 1; margin-top: 18px; }
+.case-workflow-panel .summary-row { margin: 14px 0 0; }
+.case-workflow-expanded .icon-toggle span::after { display: none; }
+@media (max-width: 980px) {
+  .case-workflow-head { grid-template-columns: 1fr; align-items: start; }
+  .case-workflow-head p { white-space: normal; }
+  .case-workflow-actions { justify-content: flex-start; }
+}

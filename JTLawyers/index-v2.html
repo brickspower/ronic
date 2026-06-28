@@ -143,38 +143,44 @@
           </div>
         </header>
 
-        <section class="workflow-panel" aria-label="Workflow stage summary">
-          <div class="section-head">
+        <section class="workflow-panel case-workflow-panel case-workflow-collapsed" id="caseWorkflowPanel" aria-label="Workflow stage summary">
+          <div class="section-head case-workflow-head">
             <div>
               <h2>All Case Workflow</h2>
               <p>Converted client cases grouped by file preparation stage.</p>
             </div>
-            <button class="ghost-btn" type="button" id="clearFilter">Clear filter</button>
+            <div class="case-workflow-actions">
+              <button class="icon-toggle" type="button" id="caseInfoToggle" aria-expanded="false" aria-label="Show case workflow summary">
+                <span aria-hidden="true"></span>
+              </button>
+              <button class="ghost-btn" type="button" id="clearFilter">Clear filter</button>
+            </div>
           </div>
-          <div class="stage-rail" id="stageRail"></div>
-        </section>
-
-        <section class="summary-row" aria-label="Case summary">
-          <button class="summary-card selected" type="button" data-filter="all">
-            <span class="summary-icon blue"></span>
-            <strong id="totalCases">0</strong>
-            <small>Total active cases</small>
-          </button>
-          <button class="summary-card" type="button" data-filter="review">
-            <span class="summary-icon yellow"></span>
-            <strong id="reviewCases">0</strong>
-            <small>Need lawyer review</small>
-          </button>
-          <button class="summary-card" type="button" data-filter="risk">
-            <span class="summary-icon coral"></span>
-            <strong id="riskCases">0</strong>
-            <small>High risk cases</small>
-          </button>
-          <button class="summary-card" type="button" data-filter="completed">
-            <span class="summary-icon teal"></span>
-            <strong id="completedCases">0</strong>
-            <small>Ready or completed</small>
-          </button>
+          <div class="case-workflow-body" id="caseWorkflowBody">
+            <div class="stage-rail" id="stageRail"></div>
+            <section class="summary-row" aria-label="Case summary">
+              <button class="summary-card selected" type="button" data-filter="all">
+                <span class="summary-icon blue"></span>
+                <strong id="totalCases">0</strong>
+                <small>Total active cases</small>
+              </button>
+              <button class="summary-card" type="button" data-filter="review">
+                <span class="summary-icon yellow"></span>
+                <strong id="reviewCases">0</strong>
+                <small>Need lawyer review</small>
+              </button>
+              <button class="summary-card" type="button" data-filter="risk">
+                <span class="summary-icon coral"></span>
+                <strong id="riskCases">0</strong>
+                <small>High risk cases</small>
+              </button>
+              <button class="summary-card" type="button" data-filter="completed">
+                <span class="summary-icon teal"></span>
+                <strong id="completedCases">0</strong>
+                <small>Ready or completed</small>
+              </button>
+            </section>
+          </div>
         </section>
 
         <section class="list-panel">
