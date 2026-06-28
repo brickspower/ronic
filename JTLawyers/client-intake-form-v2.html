@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JT Lawyers 客户个人资料表</title>
+  <link rel="stylesheet" href="client-intake-form-v2.css" />
+</head>
+<body>
+  <main class="form-shell">
+    <section class="form-hero">
+      <div>
+        <div class="brand-mark">JT Lawyers</div>
+        <h1>客户个人资料表</h1>
+        <p>请填写以下信息，律师会根据你的情况准备初步方案和报价。本表格不会自动递交签证申请。</p>
+      </div>
+      <aside class="hero-card">
+        <span>ABC Migration Lawyers</span>
+        <strong>预计填写时间：8-12 分钟</strong>
+        <small>信息仅用于预约咨询和方案准备</small>
+      </aside>
+    </section>
+
+    <form id="clientIntakeForm" class="intake-form">
+      <section class="form-section">
+        <div class="section-title"><span>01</span><h2>基础个人信息</h2></div>
+        <div class="field-grid">
+          <label>中文姓名<input name="chineseName" required placeholder="例如：张敏" /></label>
+          <label>英文姓名<input name="englishName" placeholder="例如：Min Zhang" /></label>
+          <label>联系电话<input name="phone" required placeholder="澳洲或中国手机号" /></label>
+          <label>邮箱<input name="email" type="email" required placeholder="name@example.com" /></label>
+          <label>当前所在地<input name="location" placeholder="例如：Melbourne / Shanghai" /></label>
+          <label>首选沟通方式<select name="channel"><option>微信</option><option>邮件</option><option>电话</option></select></label>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <div class="section-title"><span>02</span><h2>签证与咨询目标</h2></div>
+        <div class="field-grid">
+          <label>感兴趣的签证类型<select name="visaInterest"><option>188 Business Innovation</option><option>Partner Visa 820/801</option><option>Student Visa 500</option><option>Skilled Visa 189/190/491</option><option>Employer Sponsored 482/186</option><option>不确定，需要律师判断</option></select></label>
+          <label>当前签证状态<input name="currentVisa" placeholder="例如：学生签 / BVA / 境外" /></label>
+          <label>当前签证到期日<input name="visaExpiry" type="date" /></label>
+          <label>是否有拒签或取消记录<select name="refusal"><option>没有</option><option>有</option><option>不确定</option></select></label>
+        </div>
+        <label class="wide-field">你希望律师帮你解决什么问题？<textarea name="goal" placeholder="请简单描述你的情况、目标和担心的问题"></textarea></label>
+      </section>
+
+      <section class="form-section">
+        <div class="section-title"><span>03</span><h2>家庭与同行人员</h2></div>
+        <div class="field-grid">
+          <label>婚姻状态<select name="marital"><option>单身</option><option>已婚</option><option>事实伴侣</option><option>离异</option></select></label>
+          <label>是否有配偶/伴侣一同申请<select name="partner"><option>否</option><option>是</option><option>待确认</option></select></label>
+          <label>子女数量<input name="children" type="number" min="0" value="0" /></label>
+          <label>是否有家庭成员在澳洲<select name="familyAu"><option>否</option><option>是</option></select></label>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <div class="section-title"><span>04</span><h2>学历、工作与资金背景</h2></div>
+        <div class="field-grid">
+          <label>最高学历<input name="education" placeholder="例如：本科 / 硕士" /></label>
+          <label>当前职业<input name="occupation" placeholder="例如：Business Owner" /></label>
+          <label>过去 5 年主要工作/经营经历<input name="workHistory" placeholder="一句话概括" /></label>
+          <label>大致可证明资金<select name="funds"><option>少于 AUD 50,000</option><option>AUD 50,000 - 200,000</option><option>AUD 200,000 - 800,000</option><option>AUD 800,000 以上</option><option>不方便填写</option></select></label>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <div class="section-title"><span>05</span><h2>可提供文件</h2></div>
+        <div class="check-grid">
+          <label><input type="checkbox" name="docs" value="passport" /> 护照</label>
+          <label><input type="checkbox" name="docs" value="visa" /> 当前签证</label>
+          <label><input type="checkbox" name="docs" value="education" /> 学历材料</label>
+          <label><input type="checkbox" name="docs" value="employment" /> 工作/雇主证明</label>
+          <label><input type="checkbox" name="docs" value="bank" /> 银行/资金证明</label>
+          <label><input type="checkbox" name="docs" value="relationship" /> 关系证明</label>
+        </div>
+        <label class="wide-field">其他补充<textarea name="notes" placeholder="例如：已有材料、紧急时间点、希望预约的时间"></textarea></label>
+      </section>
+
+      <section class="submit-panel">
+        <label class="consent"><input type="checkbox" required /> 我确认以上信息真实，并同意律师团队用于咨询方案准备。</label>
+        <button type="submit">提交给律师团队</button>
+      </section>
+    </form>
+
+    <section class="success-panel" id="successPanel" hidden>
+      <div class="success-icon">✓</div>
+      <h2>资料已提交</h2>
+      <p>JT Lawyers 已收到你的个人资料。律师团队会根据你的信息准备咨询方案和报价。</p>
+      <a href="index-v2.html">返回 JT Lawyers demo</a>
+    </section>
+  </main>
+  <script src="client-intake-form-v2.js"></script>
+</body>
+</html>

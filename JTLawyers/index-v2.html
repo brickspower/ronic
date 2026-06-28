@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JT Lawyers - Case Office V2</title>
+  <link rel="stylesheet" href="styles-v2.css" />
+</head>
+<body>
+  <div class="office-shell detail-collapsed" id="officeShell">
+    <aside class="left-nav">
+      <div class="brand-block">
+        <div class="brand-symbol">JT</div>
+        <div>
+          <div class="brand-name">JT Lawyers</div>
+          <div class="brand-subtitle">Migration Intelligence</div>
+        </div>
+      </div>
+
+      <nav class="menu-stack" aria-label="Main navigation">
+        <button class="menu-item active" type="button" data-panel="dashboard">
+          <span class="menu-icon">01</span>
+          Dashboard
+        </button>
+        <button class="menu-item" type="button" data-panel="enquiries">
+          <span class="menu-icon">02</span>
+          Enquiries
+        </button>
+        <button class="menu-item" type="button" data-panel="cases">
+          <span class="menu-icon">03</span>
+          Case List
+        </button>
+        <button class="menu-item" type="button" data-panel="knowledge">
+          <span class="menu-icon">04</span>
+          Knowledge Base
+        </button>
+        <button class="menu-item" type="button" data-panel="agents">
+          <span class="menu-icon">05</span>
+          AI Agents
+        </button>
+        <button class="menu-item" type="button" data-panel="documents">
+          <span class="menu-icon">06</span>
+          Documents
+        </button>
+        <button class="menu-item" type="button" data-panel="reports">
+          <span class="menu-icon">07</span>
+          Reports
+        </button>
+        <button class="menu-item" type="button" data-panel="training">
+          <span class="menu-icon">08</span>
+          Training & Rules
+        </button>
+      </nav>
+
+      <div class="office-status">
+        <div class="status-label">Office Status</div>
+        <div class="status-line"><span></span>All systems operational</div>
+        <div class="agent-dots" aria-label="AI agents online">
+          <i></i><i></i><i></i><i></i><i></i><i class="muted"></i><i class="muted"></i>
+        </div>
+        <div class="sync-note">Last sync 2 min ago</div>
+      </div>
+    </aside>
+
+    <main class="case-dashboard">
+      <section class="main-view active" id="dashboardView">
+        <header class="top-strip dashboard-top-strip">
+          <div>
+            <div class="firm-name">ABC Migration Lawyers</div>
+            <h1>Dashboard</h1>
+          </div>
+          <div class="kb-page-note">Summary reports for priority decisions, enquiries, active cases and AI team status.</div>
+          <div class="top-actions">
+            <div class="user-pill">
+              <span>RM</span>
+              <div>
+                <strong>Remeo</strong>
+                <small>Principal</small>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section class="priority-report-panel">
+          <div class="section-head compact-head">
+            <div>
+              <h2>Needs Senior Lawyer Attention</h2>
+              <p>Only current blockers requiring lawyer judgement.</p>
+            </div>
+            <button class="ghost-btn" type="button" data-dashboard-nav="case-review">View all</button>
+          </div>
+          <div class="lawyer-issue-list" id="lawyerIssueList"></div>
+        </section>
+
+        <section class="dashboard-summary-grid">
+          <div class="summary-report-card">
+            <div class="summary-card-head">
+              <div><h2>Enquiries</h2><p>New clients before case conversion.</p></div>
+              <button type="button" data-dashboard-nav="enquiries">Open</button>
+            </div>
+            <div class="report-metric-grid" id="dashboardEnquiryMetrics"></div>
+          </div>
+
+          <div class="summary-report-card">
+            <div class="summary-card-head">
+              <div><h2>Current Cases</h2><p>Converted client matters by stage and risk.</p></div>
+              <button type="button" data-dashboard-nav="cases">Open</button>
+            </div>
+            <div class="report-metric-grid" id="dashboardCaseMetrics"></div>
+          </div>
+        </section>
+
+        <section class="summary-report-card ai-status-panel">
+          <div class="summary-card-head">
+            <div><h2>AI Employee Work Status</h2><p>Who is working, waiting, or ready for review.</p></div>
+            <button type="button" data-dashboard-nav="agents">Open</button>
+          </div>
+          <div class="ai-status-list" id="dashboardAgentStatus"></div>
+        </section>
+      </section>
+
+      <section class="main-view" id="casesView">
+        <header class="top-strip">
+          <div>
+            <div class="firm-name">ABC Migration Lawyers</div>
+            <h1>Case List</h1>
+          </div>
+          <div class="search-wrap">
+            <svg class="search-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="M20 20l-3.6-3.6"></path>
+            </svg>
+            <input id="caseSearch" type="search" placeholder="Search client, visa type, case ID, passport issue..." />
+          </div>
+          <div class="top-actions">
+            <div class="user-pill">
+              <span>RM</span>
+              <div>
+                <strong>Remeo</strong>
+                <small>Principal</small>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section class="workflow-panel" aria-label="Workflow stage summary">
+          <div class="section-head">
+            <div>
+              <h2>All Case Workflow</h2>
+              <p>Converted client cases grouped by file preparation stage.</p>
+            </div>
+            <button class="ghost-btn" type="button" id="clearFilter">Clear filter</button>
+          </div>
+          <div class="stage-rail" id="stageRail"></div>
+        </section>
+
+        <section class="summary-row" aria-label="Case summary">
+          <button class="summary-card selected" type="button" data-filter="all">
+            <span class="summary-icon blue"></span>
+            <strong id="totalCases">0</strong>
+            <small>Total active cases</small>
+          </button>
+          <button class="summary-card" type="button" data-filter="review">
+            <span class="summary-icon yellow"></span>
+            <strong id="reviewCases">0</strong>
+            <small>Need lawyer review</small>
+          </button>
+          <button class="summary-card" type="button" data-filter="risk">
+            <span class="summary-icon coral"></span>
+            <strong id="riskCases">0</strong>
+            <small>High risk cases</small>
+          </button>
+          <button class="summary-card" type="button" data-filter="completed">
+            <span class="summary-icon teal"></span>
+            <strong id="completedCases">0</strong>
+            <small>Ready or completed</small>
+          </button>
+        </section>
+
+        <section class="list-panel">
+          <div class="case-tabs" id="caseTabs">
+            <button class="active" type="button" data-filter="all">All Cases</button>
+            <button type="button" data-filter="review">Need Review</button>
+            <button type="button" data-filter="risk">High Risk</button>
+            <button type="button" data-filter="blocked">Blocked</button>
+          </div>
+          <div class="case-table" role="table" aria-label="Case management list">
+            <div class="case-row case-head" role="row">
+              <div>Client</div>
+              <div>Visa</div>
+              <div>Stage</div>
+              <div>AI Owner</div>
+              <div>Risk</div>
+              <div>Next Action</div>
+              <div>Updated</div>
+            </div>
+            <div id="caseRows"></div>
+          </div>
+        </section>
+      </section>
+
+      <section class="main-view" id="enquiriesView">
+        <header class="top-strip kb-top-strip">
+          <div>
+            <div class="firm-name">ABC Migration Lawyers</div>
+            <h1>Enquiries</h1>
+          </div>
+          <div class="kb-page-note">Chinese-client enquiries before they become active cases.</div>
+          <div class="top-actions">
+            <div class="user-pill">
+              <span>RM</span>
+              <div>
+                <strong>Remeo</strong>
+                <small>Principal</small>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section class="enquiry-panel enquiry-panel-collapsed" id="enquiryPanel">
+          <div class="section-head enquiry-summary-head">
+            <div>
+              <h2>Chinese Client Intake Automation</h2>
+              <p>Receive enquiry, send profile form, prepare strategy, book consultation, then convert accepted clients into cases.</p>
+            </div>
+            <div class="enquiry-head-actions">
+              <button class="icon-toggle" type="button" id="enquiryInfoToggle" aria-expanded="false" aria-label="Show intake workflow summary">
+                <span aria-hidden="true"></span>
+              </button>
+              <button class="ghost-btn" type="button" id="newEnquiryButton">New enquiry</button>
+            </div>
+          </div>
+          <div class="enquiry-panel-body" id="enquiryPanelBody">
+            <div class="intake-flow-strip">
+              <div><span>01</span><strong>Enquiry received</strong><small>WeChat / email / referral</small></div>
+              <div><span>02</span><strong>Send profile form</strong><small>Chinese personal information form</small></div>
+              <div><span>03</span><strong>Form returned</strong><small>AI checks missing answers</small></div>
+              <div><span>04</span><strong>Senior lawyer strategy</strong><small>Pathway and risk view</small></div>
+              <div><span>05</span><strong>Meeting + quote</strong><small>Consultation, proposal, fee quote</small></div>
+            </div>
+            <div class="enquiry-metrics">
+              <div><strong id="openEnquiriesCount">7</strong><small>Open enquiries</small></div>
+              <div><strong id="returnedFormsCount">5</strong><small>Profile forms returned</small></div>
+              <div><strong id="lawyerReviewEnquiriesCount">2</strong><small>Senior lawyer review</small></div>
+              <div><strong id="quoteReadyCount">3</strong><small>Quote ready</small></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="enquiry-toolbar" aria-label="Search enquiries">
+          <div class="search-wrap enquiry-search-wrap">
+            <svg class="search-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="M20 20l-3.6-3.6"></path>
+            </svg>
+            <input id="enquirySearch" type="search" placeholder="Search prospect, visa interest, channel, next action..." />
+          </div>
+        </section>
+
+        <section class="list-panel enquiry-list-panel">
+          <div class="case-table enquiry-table" role="table" aria-label="Enquiry list">
+            <div class="enquiry-row enquiry-head" role="row">
+              <div>Prospect</div>
+              <div>Channel</div>
+              <div>Visa Interest</div>
+              <div>Profile Form</div>
+              <div>Meeting</div>
+              <div>Next Action</div>
+            </div>
+            <div id="enquiryRows"></div>
+          </div>
+        </section>
+      </section>
+
+      <section class="main-view" id="knowledgeView">
+        <header class="top-strip kb-top-strip">
+          <div>
+            <div class="firm-name">ABC Migration Lawyers</div>
+            <h1>Knowledge Base</h1>
+          </div>
+          <div class="kb-page-note">Rules approved here become the review standard for AI agents.</div>
+          <div class="top-actions">
+            <div class="user-pill">
+              <span>RM</span>
+              <div>
+                <strong>Remeo</strong>
+                <small>Principal</small>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section class="kb-command-panel">
+          <div class="section-head">
+            <div>
+              <h2>Teach the AI team a rule</h2>
+              <p>Write it like you would instruct a staff member. The system will translate it into a structured rule for lawyer confirmation.</p>
+            </div>
+            <span class="kb-mode-pill">Lawyer approval required</span>
+          </div>
+          <div class="kb-input-row">
+            <textarea id="kbRuleInput" placeholder="Example: From now on, passport expiry within 12 months must be marked red for lawyer review."></textarea>
+            <button class="kb-primary-btn" type="button" id="kbParseRule">Understand rule</button>
+          </div>
+          <div class="kb-understanding" id="kbUnderstanding">
+            <div class="kb-understanding-title">AI understanding preview</div>
+            <div class="kb-empty-understanding">Enter a rule to see how JT Lawyers will structure it before saving.</div>
+          </div>
+        </section>
+
+        <section class="kb-grid">
+          <div class="kb-card kb-wide">
+            <div class="kb-card-head">
+              <h3>Approved Review Rules</h3>
+              <span id="kbRuleCount">0 active</span>
+            </div>
+            <div class="kb-rule-list" id="kbRuleList"></div>
+          </div>
+          <div class="kb-card">
+            <div class="kb-card-head">
+              <h3>Source Library</h3>
+              <span>Updated today</span>
+            </div>
+            <div class="source-list">
+              <div><strong>Migration Act & Regulations</strong><small>42 source files · official rules</small></div>
+              <div><strong>State Nomination Policies</strong><small>NSW, VIC, QLD, SA, WA</small></div>
+              <div><strong>Occupation Assessment Standards</strong><small>ACS, VETASSESS, Engineers Australia</small></div>
+              <div><strong>Firm Internal Standards</strong><small>Approved by Remeo</small></div>
+            </div>
+          </div>
+          <div class="kb-card">
+            <div class="kb-card-head">
+              <h3>Rules Used By Agents</h3>
+              <span>Live</span>
+            </div>
+            <div class="agent-rule-map">
+              <div><span class="agent-dot emily">E</span><strong>Emily</strong><small>Document review rules</small></div>
+              <div><span class="agent-dot david">D</span><strong>David</strong><small>Missing document follow-up rules</small></div>
+              <div><span class="agent-dot mia">M</span><strong>Mia</strong><small>Submission drafting standards</small></div>
+            </div>
+          </div>
+          <div class="kb-card kb-wide">
+            <div class="kb-card-head">
+              <h3>Cases Affected by Active Rules</h3>
+              <span>Review queue</span>
+            </div>
+            <div class="affected-case-list">
+              <button type="button" data-case="C-250627-001"><strong>Chen Family</strong><span>Passport / income evidence rule triggered</span><em>High</em></button>
+              <button type="button" data-case="C-250621-013"><strong>Garcia Family</strong><span>Employer reference format rule triggered</span><em>Medium</em></button>
+              <button type="button" data-case="C-250622-011"><strong>Wang Lei</strong><span>Submission duties alignment needs lawyer view</span><em>High</em></button>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <aside class="case-detail" id="caseDetail" aria-label="Selected case detail">
+      <button class="panel-toggle panel-toggle-corner" type="button" id="detailToggle" aria-label="Hide case panel" aria-pressed="true">
+        <span class="panel-toggle-icon" aria-hidden="true"></span>
+      </button>
+      <div id="detailContent"></div>
+    </aside>
+  </div>
+
+
+    <div class="modal-backdrop" id="newEnquiryModal" hidden>
+      <form class="new-enquiry-modal" id="newEnquiryForm" aria-label="Create new enquiry profile">
+        <div class="modal-head">
+          <div>
+            <h2>New enquiry profile</h2>
+            <p>Create a new prospect and prepare the profile form link.</p>
+          </div>
+          <button class="modal-close" type="button" id="closeNewEnquiry" aria-label="Close new enquiry form">×</button>
+        </div>
+        <div class="modal-grid">
+          <label>Client name<input name="client" required placeholder="e.g. Zhao Ning" /></label>
+          <label>Channel<select name="channel"><option>WeChat</option><option>Email</option><option>Phone</option><option>Referral</option><option>WeChat + Email</option></select></label>
+          <label>Visa interest<input name="visa" required placeholder="e.g. Partner Visa 820" /></label>
+          <label>Lead<select name="owner"><option>Sarah</option><option>David</option><option>Helen Wang</option></select></label>
+          <label>Phone<input name="phone" placeholder="Client phone" /></label>
+          <label>Email<input name="email" type="email" placeholder="Client email" /></label>
+          <label>Urgency<select name="urgency"><option>Normal</option><option>High</option><option>Low</option></select></label>
+          <label>Budget range<input name="budget" placeholder="e.g. $5k-$7k" /></label>
+          <label class="modal-wide">Initial notes<textarea name="notes" placeholder="What did the client ask about?"></textarea></label>
+        </div>
+        <div class="modal-actions">
+          <button class="ghost-btn" type="button" id="cancelNewEnquiry">Cancel</button>
+          <button class="create-btn" type="submit">Create profile</button>
+        </div>
+      </form>
+    </div>
+
+  <script src="app-v2.js"></script>
+</body>
+</html>
