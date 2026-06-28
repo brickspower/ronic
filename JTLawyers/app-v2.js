@@ -615,10 +615,19 @@ function ensureApplicationPack(item) {
       submittedAt: '',
       lawyerNotified: false,
       documents: [],
-      interactions: [['System', 'Formal application pack link is ready to send to client.', 'Now']]
+      interactions: [['System', 'Application pack created. Link is ready for client sharing.', 'Now']]
     };
   }
   return item.applicationPack;
+}
+
+function applicationPackShareText(item) {
+  const pack = ensureApplicationPack(item);
+  return `您好 ${item.client}，\n\n您的正式申请资料表已经准备好。请通过以下链接填写申请信息并上传资料：\n${pack.link}\n\n请准备：护照、当前签证、证件照、无犯罪记录、工作/学历/关系/资金等相关材料。\n\n系统会先检查文件格式、大小、清晰度和基础内容。如果只是文件大小或格式问题，系统会协助处理；如果文件内容不符合要求，我们会提示您如何重新获取正确版本。\n\n重要提示：资料提交后仍会由律师进行人工审核，不会自动递交签证申请。\n\nJT Lawyers`;
+}
+
+function applicationPackShareHtml(item) {
+  return applicationPackShareText(item).replaceAll('\\n', '<br>');
 }
 
 function renderApplicationPack(item) {
@@ -641,6 +650,10 @@ function renderApplicationPack(item) {
       <p>${doc.message}</p>
     </div>`).join('')}
   </div>` : '<div class="application-empty">No client documents submitted yet.</div>';
+  const shareHtml = pack.status !== 'not-sent' ? `<div class="application-share-card">
+    <div class="application-share-head"><strong>Message for client</strong><button type="button" data-case-action="copy-application-message">Copy message</button></div>
+    <div class="application-share-text">${applicationPackShareHtml(item)}</div>
+  </div>` : '';
   const actionHtml = pack.status === 'not-sent' ? `<button class="application-primary" type="button" data-case-action="send-application-pack">Send application form link</button>` :
     pack.status === 'waiting-client' ? `<button class="application-primary" type="button" data-case-action="demo-client-submit-pack">Demo: client submitted documents</button>` :
     pack.status === 'submitted' ? `<div class="application-actions"><button type="button" data-case-action="auto-fix-files">Auto-fix file size / format issues</button><button type="button" data-case-action="request-lawyer-intervention">Request lawyer intervention</button></div>` :
@@ -654,10 +667,14 @@ function renderApplicationPack(item) {
         <div><strong>${statusLabel}</strong><small>Client form, uploads, AI checks and lawyer review pack</small></div>
         <span>${pack.status.replaceAll('-', ' ')}</span>
       </div>
-      <div class="form-link-status">
-        <div><small>Client application form</small><a class="form-link-anchor" href="${pack.link}" target="_blank" rel="noopener">${pack.link}</a></div>
-        <div><small>Current owner</small><strong>${pack.status === 'needs-lawyer' || pack.status === 'ready-lawyer-review' ? (item.responsibleLawyer || 'Helen Wang') : 'AI document team'}</strong></div>
+      <div class="application-link-row">
+        <a href="${pack.link}" target="_blank" rel="noopener">Open client form</a>
+        <button type="button" data-case-action="copy-application-link">Copy link</button>
       </div>
+      <div class="form-link-status application-owner-row">
+        <div><small>Current owner</small><strong>${pack.status === 'needs-lawyer' || pack.status === 'ready-lawyer-review' ? (item.responsibleLawyer || 'Helen Wang') : 'Emily · Document Review Officer'}</strong></div>
+      </div>
+      ${shareHtml}
       ${documentHtml}
       ${actionHtml}
       <div class="interaction-timeline">
@@ -815,7 +832,7 @@ function createCaseFromEnquiry(item) {
       lawyerNotified: false,
       documents: [],
       interactions: [
-        ['System', 'Case created. Formal application pack link is ready to send to client.', 'Now']
+        ['System', 'Case created. Application pack link is ready for client sharing.', 'Now']
       ]
     }
   };
@@ -1076,11 +1093,35 @@ document.addEventListener('click', event => {
     const pack = item ? ensureApplicationPack(item) : null;
     if (!item || !pack) return;
     const action = caseAction.dataset.caseAction;
+    if (action === 'copy-application-link') {
+      navigator.clipboard?.writeText(pack.link).then(() => {
+        pack.interactions.unshift(['System', 'Application form link copied for client sharing.', 'Now']);
+        persistCustomCases();
+        renderAll();
+      }).catch(() => {
+        pack.interactions.unshift(['System', 'Copy unavailable. Use Open client form and copy the browser link manually.', 'Now']);
+        persistCustomCases();
+        renderAll();
+      });
+      return;
+    }
+    if (action === 'copy-application-message') {
+      navigator.clipboard?.writeText(applicationPackShareText(item)).then(() => {
+        pack.interactions.unshift(['System', 'Client message copied for sharing.', 'Now']);
+        persistCustomCases();
+        renderAll();
+      }).catch(() => {
+        pack.interactions.unshift(['System', 'Copy unavailable. Client message is visible for manual sharing.', 'Now']);
+        persistCustomCases();
+        renderAll();
+      });
+      return;
+    }
     if (action === 'send-application-pack') {
       pack.status = 'waiting-client';
       pack.sentAt = new Date().toISOString();
       item.next = 'Client application pack';
-      pack.interactions.unshift(['System', 'Formal application form link sent to client. Waiting for client information and uploads.', 'Now']);
+      pack.interactions.unshift(['System', 'Client message prepared and application form link marked as sent.', 'Now']);
     }
     if (action === 'demo-client-submit-pack') {
       pack.status = 'submitted';
