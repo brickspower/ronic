@@ -314,6 +314,145 @@
         .check { color: var(--secondary-color); font-weight: bold; }
         .cross { color: #ef4444; font-weight: bold; }
 
+        /* Case Studies */
+        .case-hero {
+            position: relative;
+            overflow: hidden;
+            border-radius: 28px;
+            margin-bottom: 46px;
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 48%, #ecfdf5 100%);
+            box-shadow: 0 24px 70px rgba(15, 23, 42, 0.09);
+        }
+
+        .case-hero img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 8.2;
+            object-fit: cover;
+        }
+
+        .case-hero-caption {
+            position: absolute;
+            left: 28px;
+            bottom: 28px;
+            max-width: 420px;
+            padding: 20px 22px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.84);
+            border: 1px solid rgba(226, 232, 240, 0.85);
+            backdrop-filter: blur(14px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .case-hero-caption h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .case-tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .case-card {
+            position: relative;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .case-card::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 7px;
+            background: var(--case-accent, var(--accent-color));
+        }
+
+        .case-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 0.45rem;
+        }
+
+        .case-subtitle {
+            min-height: 50px;
+            color: var(--text-muted);
+            margin-bottom: 22px;
+        }
+
+        .case-chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .case-chip {
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            font-size: 0.82rem;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .workflow-line {
+            display: grid;
+            gap: 12px;
+            margin: 22px 0;
+        }
+
+        .workflow-step {
+            display: grid;
+            grid-template-columns: 28px 1fr;
+            gap: 12px;
+            align-items: start;
+        }
+
+        .workflow-dot {
+            width: 28px;
+            height: 28px;
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--case-accent, var(--accent-color)) 15%, white);
+            color: var(--case-accent, var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 800;
+        }
+
+        .workflow-step strong {
+            display: block;
+            color: var(--primary-color);
+            line-height: 1.35;
+        }
+
+        .workflow-step span {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.55;
+        }
+
+        .case-result {
+            margin-top: 24px;
+            padding: 16px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #f8fafc, #ffffff);
+            border: 1px solid var(--border-color);
+        }
+
+        .case-result strong {
+            color: var(--secondary-color);
+        }
+
         /* FAQ */
         .faq-item {
             background: white;
@@ -381,11 +520,28 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
             .btn { width: 100%; margin: 10px 0 0 0; }
+            header .btn {
+                width: auto;
+                margin: 0;
+                padding: 9px 14px !important;
+                font-size: 0.82rem !important;
+                white-space: nowrap;
+            }
+            .logo { font-size: 1.25rem; }
             .btn-outline { margin-left: 0; }
             .comparison-table { font-size: 0.9rem; }
             .comparison-table th, .comparison-table td { padding: 15px 10px; }
             .process-step { flex-direction: column; }
             .step-number { margin-bottom: 10px; }
+            .case-tabs { grid-template-columns: 1fr; }
+            .case-hero-caption {
+                position: static;
+                max-width: none;
+                margin: 0;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .case-hero img { aspect-ratio: 4 / 3; }
         }
     </style>
 </head>
@@ -618,30 +774,99 @@
         </div>
     </section>
 
-    <!-- Cases -->
+    <!-- Case Studies -->
     <section class="section">
         <div class="container">
             <div class="text-center mb-12">
-                <h2>AI 员工如何改变一天的工作？</h2>
+                <h2>真实业务案例：AI 员工不是聊天，而是在跟进流程</h2>
+                <p>每个行业的重复工作不同。RONIC 会把 AI 员工训练成理解你业务节点、文件、客户状态和下一步动作的执行团队。</p>
             </div>
-            <div class="grid-3">
-                <div class="card" style="border-top: 4px solid var(--accent-color);">
-                    <h3>移民律师事务所</h3>
-                    <p><strong>以前：</strong>新人需 2-3 小时检查客户材料。</p>
-                    <p><strong>现在：</strong>AI 文档员工先完成预审，列出缺失文件和风险点。</p>
-                    <p><strong>结果：</strong>律师只做最终复核，效率提升 300%。</p>
+
+            <div class="case-hero">
+                <picture>
+                    <source srcset="assets/case-studies-workflow.webp" type="image/webp">
+                    <img src="assets/case-studies-workflow.png" alt="RONIC AI workflow scenes for migration law, showroom projects and product supply management">
+                </picture>
+                <div class="case-hero-caption">
+                    <h3>从客户资料、项目排期到采购订单</h3>
+                    <p>AI 员工把分散在表格、邮件、微信、PDF、报价单和供应商信息里的工作，整理成可追踪的状态流。</p>
                 </div>
-                <div class="card" style="border-top: 4px solid var(--secondary-color);">
-                    <h3>零售 / 批发生意</h3>
-                    <p><strong>以前：</strong>员工花大量时间写文案、处理库存询问。</p>
-                    <p><strong>现在：</strong>AI 运营员工自动生成内容、提醒库存、辅助回复。</p>
-                    <p><strong>结果：</strong>上新速度加快，获客效率显著提升。</p>
+            </div>
+
+            <div class="case-tabs">
+                <div class="case-card" style="--case-accent: #2563eb;">
+                    <h3>Migration Law Firm</h3>
+                    <p class="case-subtitle">把客户咨询、资料收集、文件审核和律师复核，变成一个清楚的案件准备流程。</p>
+                    <div class="case-chip-row">
+                        <span class="case-chip">客户资料表</span>
+                        <span class="case-chip">文件预审</span>
+                        <span class="case-chip">律师 Review</span>
+                    </div>
+                    <div class="workflow-line">
+                        <div class="workflow-step">
+                            <div class="workflow-dot">1</div>
+                            <div><strong>客户填写资料并上传文件</strong><span>系统收集个人信息、签证背景、护照、学历、工作、关系证明等文件。</span></div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="workflow-dot">2</div>
+                            <div><strong>AI 自动检查资料完整性</strong><span>识别缺失文件、过期护照、格式不合规、扫描不清晰等问题。</span></div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="workflow-dot">3</div>
+                            <div><strong>生成律师复核包</strong><span>把客户情况、缺失项、风险点和建议下一步整理给 senior lawyer。</span></div>
+                        </div>
+                    </div>
+                    <div class="case-result"><strong>结果：</strong>律师不再从零整理材料，只处理需要专业判断的事项。</div>
                 </div>
-                <div class="card" style="border-top: 4px solid var(--primary-color);">
-                    <h3>会计事务所</h3>
-                    <p><strong>以前：</strong>反复追客户资料、手动整理邮件附件。</p>
-                    <p><strong>现在：</strong>AI 邮件员工读取邮件，识别附件，生成缺失提醒。</p>
-                    <p><strong>结果：</strong>行政沟通减少，资料收集自动化。</p>
+
+                <div class="case-card" style="--case-accent: #0d9488;">
+                    <h3>SOQOO 展柜项目</h3>
+                    <p class="case-subtitle">3 个月定制项目周期长，AI 帮团队持续追踪客户确认、生产、物流和安装。</p>
+                    <div class="case-chip-row">
+                        <span class="case-chip">尺寸定制</span>
+                        <span class="case-chip">工厂排期</span>
+                        <span class="case-chip">海运物流</span>
+                    </div>
+                    <div class="workflow-line">
+                        <div class="workflow-step">
+                            <div class="workflow-dot">1</div>
+                            <div><strong>确认需求与报价</strong><span>记录尺寸、材质、灯光、安装环境和客户确认状态。</span></div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="workflow-dot">2</div>
+                            <div><strong>跟进生产与海运节点</strong><span>把工厂排期、出货时间、船期、清关、到港状态放进同一条时间线。</span></div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="workflow-dot">3</div>
+                            <div><strong>协调配送与安装</strong><span>提醒客户付款、确认安装日期、安排人员和现场注意事项。</span></div>
+                        </div>
+                    </div>
+                    <div class="case-result"><strong>结果：</strong>长周期项目不再靠人工记忆追进度，负责人每天只看异常节点。</div>
+                </div>
+
+                <div class="case-card" style="--case-accent: #f59e0b;">
+                    <h3>Bricks Power 供货商</h3>
+                    <p class="case-subtitle">SKU 多、供应商多、采购频繁，AI 帮团队管理产品资料、供货渠道和补货动作。</p>
+                    <div class="case-chip-row">
+                        <span class="case-chip">SKU 管理</span>
+                        <span class="case-chip">供应商渠道</span>
+                        <span class="case-chip">采购订单</span>
+                    </div>
+                    <div class="workflow-line">
+                        <div class="workflow-step">
+                            <div class="workflow-dot">1</div>
+                            <div><strong>整理产品与库存信息</strong><span>统一产品名称、规格、图片、进价、售价、库存和销售表现。</span></div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="workflow-dot">2</div>
+                            <div><strong>比较供应商与采购条件</strong><span>追踪供货价、起订量、交期、缺货风险和历史合作记录。</span></div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="workflow-dot">3</div>
+                            <div><strong>生成补货与采购建议</strong><span>根据库存、安全线和销售速度，提醒团队创建采购订单。</span></div>
+                        </div>
+                    </div>
+                    <div class="case-result"><strong>结果：</strong>采购和库存不再散落在多个表格里，团队能更早发现缺货和滞销风险。</div>
                 </div>
             </div>
         </div>
@@ -685,7 +910,7 @@
                         </tr>
                         <tr>
                             <td>最终目标</td>
-                            <td><span class="cross">✕</span> 只是个玩具</td>
+                            <td><span class="cross">✕</span> 停留在单次问答</td>
                             <td><span class="check">✓</span> 关注降本增效和收入增长</td>
                         </tr>
                     </tbody>
@@ -772,15 +997,15 @@
             </div>
             <div class="faq-item">
                 <div class="faq-question">RONIC 可以帮我节省多少人工成本？ <span class="faq-icon">+</span></div>
-                <div class="faq-answer">根据行业不同，通常可以替代 0.5 到 2 个全职初级员工的工作量，具体取决于流程的标准化程度。我们在免费咨询中会为你做详细测算。</div>
+                <div class="faq-answer">根据行业不同，通常可以承担 0.5 到 2 个全职初级岗位的重复工作量，具体取决于流程的标准化程度。我们在免费咨询中会为你做详细测算。</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">AI 可以读取邮件和附件吗？ <span class="faq-icon">+</span></div>
                 <div class="faq-answer">可以。我们的 AI 员工可以安全地连接你的邮箱，读取邮件内容，识别 PDF/Word/Excel 等附件，并提取关键信息生成报告或任务。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-question">AI 会不会直接替代真人员工？ <span class="faq-icon">+</span></div>
-                <div class="faq-answer">我们的目标是替代“重复性工作”，而不是“人”。AI 处理繁琐事务，让你的真人员工专注于高价值的客户服务、战略决策和创意工作，从而提升整体团队价值。</div>
+                <div class="faq-question">AI 会不会影响现有团队？ <span class="faq-icon">+</span></div>
+                <div class="faq-answer">我们的目标是减少重复性工作，而不是替代人。AI 处理繁琐事务，让真人员工专注于高价值客户服务、专业判断和业务增长，从而提升整体团队价值。</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">3 天 Demo 会做到什么程度？ <span class="faq-icon">+</span></div>
