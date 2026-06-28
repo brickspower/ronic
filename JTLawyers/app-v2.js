@@ -615,7 +615,7 @@ function renderCaseDetail(item) {
   <div class="case-facts">
     <div class="fact"><small>Visa</small><strong>${item.visa}</strong></div>
     <div class="fact"><small>Risk</small><strong>${item.risk}</strong></div>
-    <div class="fact"><small>Lead</small><strong>${item.owner}</strong></div>
+    <div class="fact"><small>Lawyer</small><strong>${item.responsibleLawyer || item.finalCase?.lawyer || 'Helen Wang'}</strong></div>
   </div>
 
   <section class="detail-section">
