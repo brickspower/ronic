@@ -148,60 +148,379 @@
 
         /* Hero Section */
         .hero {
-            padding-top: 160px;
-            padding-bottom: 100px;
-            background: radial-gradient(circle at top right, #eff6ff, #ffffff);
+            padding-top: 128px;
+            padding-bottom: 72px;
+            background:
+                radial-gradient(circle at 78% 14%, rgba(37, 99, 235, 0.12), transparent 34%),
+                linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
         }
 
         .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 54px;
+            align-items: center;
+            text-align: left;
         }
 
         .hero h1 {
-            font-size: 2.5rem;
+            font-size: clamp(2.4rem, 5vw, 4.4rem);
             margin-bottom: 1.5rem;
             color: var(--primary-color);
+            letter-spacing: -0.04em;
         }
 
         .hero p {
             font-size: 1.25rem;
             margin-bottom: 2.5rem;
             max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
-        .hero-visual {
-            margin-top: 60px;
+        .trust-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 30px;
+        }
+
+        .trust-item {
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.78);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .trust-item strong {
+            display: block;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            line-height: 1.2;
+        }
+
+        .trust-item span {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            margin-top: 4px;
+        }
+
+        .hero-console {
+            position: relative;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 28px 90px rgba(15, 23, 42, 0.14);
+            overflow: hidden;
+        }
+
+        .console-topbar {
             display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(180deg, #ffffff, #f8fafc);
         }
 
-        .ai-role-card {
-            background: white;
-            padding: 15px 20px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-md);
+        .console-brand {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 1px solid var(--border-color);
-            animation: float 3s ease-in-out infinite;
+            gap: 20px;
         }
 
-        .ai-role-card:nth-child(2) { animation-delay: 0.5s; }
-        .ai-role-card:nth-child(3) { animation-delay: 1s; }
-        .ai-role-card:nth-child(4) { animation-delay: 1.5s; }
+        .console-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-color), #0f766e);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .console-brand strong,
+        .console-case-title strong {
+            display: block;
+            color: var(--primary-color);
+            line-height: 1.2;
+        }
+
+        .console-brand span,
+        .console-case-title span,
+        .console-mini span,
+        .case-row span {
+            color: var(--text-muted);
+            font-size: 0.86rem;
+        }
+
+        .console-status {
+            padding: 8px 12px;
+            border-radius: 999px;
+            color: #047857;
+            background: #d1fae5;
+            font-weight: 700;
+            font-size: 0.82rem;
+        }
+
+        .console-body {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            min-height: 430px;
+        }
+
+        .case-list-preview {
+            padding: 22px;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .console-search {
+            padding: 13px 14px;
+            border-radius: 14px;
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+
+        .case-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 14px;
+            padding: 15px 0;
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        .case-row strong {
+            display: block;
+            color: var(--primary-color);
+            font-size: 0.96rem;
+            margin-bottom: 2px;
+        }
+
+        .case-badge {
+            align-self: start;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .badge-red { background: #fee2e2; color: #b91c1c; }
+        .badge-blue { background: #dbeafe; color: #1d4ed8; }
+        .badge-green { background: #d1fae5; color: #047857; }
+        .badge-yellow { background: #fef3c7; color: #b45309; }
+
+        .console-detail {
+            padding: 24px;
+            background: linear-gradient(180deg, #ffffff, #f8fafc);
+        }
+
+        .console-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 18px 0;
+        }
+
+        .console-mini {
+            padding: 14px;
+            border-radius: 16px;
+            background: white;
+            border: 1px solid var(--border-color);
+        }
+
+        .console-mini strong {
+            display: block;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .assistant-note {
+            padding: 16px;
+            border-radius: 18px;
+            background: #ecfeff;
+            border: 1px solid #bae6fd;
+            color: #164e63;
+            font-size: 0.94rem;
+            margin-top: 18px;
+        }
+
+        .visual-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: 34px;
+        }
+
+        .visual-step-card {
+            padding: 22px;
+            border-radius: 22px;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .visual-step-card strong {
+            display: block;
+            color: var(--primary-color);
+            margin: 10px 0 6px;
+            font-size: 1.05rem;
+        }
+
+        .visual-step-card span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .mini-chart {
+            height: 42px;
+            display: flex;
+            align-items: end;
+            gap: 6px;
+        }
+
+        .mini-chart i {
+            display: block;
+            width: 12px;
+            border-radius: 6px 6px 2px 2px;
+            background: linear-gradient(180deg, #60a5fa, #0f766e);
+        }
+
+        .role-board,
+        .case-operating-board {
+            border: 1px solid var(--border-color);
+            border-radius: 28px;
+            background: #ffffff;
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            margin-bottom: 34px;
+        }
+
+        .role-board-head,
+        .case-board-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(180deg, #ffffff, #f8fafc);
+        }
+
+        .role-board-head strong,
+        .case-board-head strong {
+            display: block;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .role-board-head span,
+        .case-board-head span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .role-board-grid {
+            display: grid;
+            grid-template-columns: 0.9fr 1.2fr 0.9fr;
+        }
+
+        .role-lane {
+            padding: 22px;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .role-lane:last-child {
+            border-right: 0;
+        }
+
+        .lane-title {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 14px;
+        }
+
+        .work-ticket {
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            background: #fff;
+            margin-bottom: 12px;
+        }
+
+        .work-ticket strong {
+            display: block;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+        }
+
+        .work-ticket span {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
+
+        .case-board-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .case-board-column {
+            padding: 22px;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .case-board-column:last-child {
+            border-right: 0;
+        }
+
+        .timeline-node {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 18px;
+        }
+
+        .timeline-node::before {
+            content: "";
+            position: absolute;
+            left: 7px;
+            top: 7px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--accent-color);
+        }
+
+        .timeline-node::after {
+            content: "";
+            position: absolute;
+            left: 11px;
+            top: 22px;
+            bottom: -18px;
+            width: 1px;
+            background: var(--border-color);
+        }
+
+        .timeline-node:last-child::after {
+            display: none;
+        }
+
+        .timeline-node strong {
+            display: block;
+            color: var(--primary-color);
+        }
+
+        .timeline-node span {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.88rem;
         }
 
         .icon-box {
@@ -533,6 +852,53 @@
             .comparison-table th, .comparison-table td { padding: 15px 10px; }
             .process-step { flex-direction: column; }
             .step-number { margin-bottom: 10px; }
+            .hero-content { grid-template-columns: 1fr; }
+            .visual-strip,
+            .role-board-grid,
+            .case-board-grid { grid-template-columns: 1fr; }
+            .trust-row { grid-template-columns: repeat(3, 1fr); }
+            .console-body { grid-template-columns: 1fr; }
+            .case-list-preview { border-right: 0; border-bottom: 1px solid var(--border-color); }
+            .role-lane,
+            .case-board-column { border-right: 0; border-bottom: 1px solid var(--border-color); }
+            .role-lane:last-child,
+            .case-board-column:last-child { border-bottom: 0; }
+            .role-board-head,
+            .case-board-head { align-items: flex-start; flex-direction: column; }
+            .hero {
+                padding-top: 112px;
+                padding-bottom: 54px;
+            }
+            .hero p {
+                font-size: 1.05rem;
+                margin-bottom: 1.4rem;
+            }
+            .trust-row {
+                gap: 8px;
+                margin-top: 16px;
+            }
+            .trust-item {
+                padding: 11px 12px;
+            }
+            .trust-item strong {
+                font-size: 0.95rem;
+            }
+            .trust-item span {
+                font-size: 0.78rem;
+            }
+            .hero-console {
+                margin-top: 8px;
+            }
+            .console-topbar {
+                padding: 12px;
+            }
+            .console-body {
+                min-height: 0;
+            }
+            .case-list-preview,
+            .console-detail {
+                padding: 16px;
+            }
             .case-tabs { grid-template-columns: 1fr; }
             .case-hero-caption {
                 position: static;
@@ -558,63 +924,142 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container hero-content">
-            <h1>帮助澳洲中小企业<br>用 AI 降低人工成本、提高效率、扩大收入</h1>
-            <p>RONIC 帮你设计、开发、培训属于你企业自己的 AI 数字员工。<br>0 开发费用，3 天免费 Demo，满意后再正式培训上岗。</p>
-            
-            <div class="cta-group">
-                <a href="#contact" class="btn btn-primary">预约 1 小时免费 AI 盈利咨询</a>
-                <a href="#solution" class="btn btn-outline">看看 AI 员工能做什么</a>
+            <div>
+                <h1>把重复工作交给 AI，老板只看进度和异常</h1>
+                <p>RONIC 为澳洲中小企业搭建专属 AI 工作台：自动收集资料、跟进客户、整理文件、提醒风险，并把结果交给团队确认。</p>
+                
+                <div class="cta-group">
+                    <a href="#contact" class="btn btn-primary">预约 1 小时免费 AI 盈利咨询</a>
+                    <a href="#case-studies" class="btn btn-outline">查看真实案例</a>
+                </div>
+
+                <div class="trust-row">
+                    <div class="trust-item">
+                        <strong>0 开发费</strong>
+                        <span>先做 Demo，满意后再上岗</span>
+                    </div>
+                    <div class="trust-item">
+                        <strong>3 天 Demo</strong>
+                        <span>用你的真实流程演示</span>
+                    </div>
+                    <div class="trust-item">
+                        <strong>人工确认</strong>
+                        <span>关键动作由团队复核</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="hero-visual">
-                <div class="ai-role-card">
-                    <div class="icon-box">📧</div>
-                    <span>AI 邮件专员</span>
+            <div class="hero-console" aria-label="RONIC AI workbench preview">
+                <div class="console-topbar">
+                    <div class="console-brand">
+                        <div class="console-mark">R</div>
+                        <div>
+                            <strong>RONIC Workbench</strong>
+                            <span>Live workflow monitor</span>
+                        </div>
+                    </div>
+                    <div class="console-status">AI team active</div>
                 </div>
-                <div class="ai-role-card">
-                    <div class="icon-box">📄</div>
-                    <span>AI 文档审核员</span>
-                </div>
-                <div class="ai-role-card">
-                    <div class="icon-box">📈</div>
-                    <span>AI 获客专员</span>
-                </div>
-                <div class="ai-role-card">
-                    <div class="icon-box">🤖</div>
-                    <span>AI 秘书</span>
+                <div class="console-body">
+                    <div class="case-list-preview">
+                        <div class="console-search">Search: client, project, SKU, document...</div>
+                        <div class="case-row">
+                            <div>
+                                <strong>Zhang Wei · 482 Visa</strong>
+                                <span>Passport expires within 12 months</span>
+                            </div>
+                            <div class="case-badge badge-red">Lawyer review</div>
+                        </div>
+                        <div class="case-row">
+                            <div>
+                                <strong>SOQOO · Display cabinet project</strong>
+                                <span>Factory production date confirmed</span>
+                            </div>
+                            <div class="case-badge badge-blue">Production</div>
+                        </div>
+                        <div class="case-row">
+                            <div>
+                                <strong>Bricks Power · SKU replenishment</strong>
+                                <span>18 fast-moving products below safe stock</span>
+                            </div>
+                            <div class="case-badge badge-yellow">PO draft</div>
+                        </div>
+                        <div class="case-row">
+                            <div>
+                                <strong>Chen Family · Client form</strong>
+                                <span>Missing employment evidence uploaded</span>
+                            </div>
+                            <div class="case-badge badge-green">Ready</div>
+                        </div>
+                    </div>
+                    <div class="console-detail">
+                        <div class="console-case-title">
+                            <strong>Today needs attention</strong>
+                            <span>Filtered by risk and waiting time</span>
+                        </div>
+                        <div class="console-mini-grid">
+                            <div class="console-mini">
+                                <strong>7</strong>
+                                <span>open items</span>
+                            </div>
+                            <div class="console-mini">
+                                <strong>3</strong>
+                                <span>need review</span>
+                            </div>
+                            <div class="console-mini">
+                                <strong>24h</strong>
+                                <span>oldest wait</span>
+                            </div>
+                            <div class="console-mini">
+                                <strong>42</strong>
+                                <span>tasks done</span>
+                            </div>
+                        </div>
+                        <div class="assistant-note">
+                            Selena: Zhang Wei should be reviewed first. The passport validity rule triggered a lawyer review flag.
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pain Points -->
+    <!-- Workflow Signal -->
     <section class="section section-bg">
         <div class="container">
             <div class="text-center mb-12">
-                <h2>你的企业真的需要更多员工吗？</h2>
-                <p class="mb-4">很多中小企业不是缺软件，而是缺“完成工作的能力”。</p>
+                <h2>你不是需要更多软件，而是需要有人持续跟进</h2>
+                <p class="mb-4">RONIC 把客户、文件、项目、库存和订单整理成一条可追踪的工作状态流。</p>
             </div>
             
-            <div class="grid-4">
-                <div class="card">
-                    <div class="card-icon">💰</div>
-                    <h3>人工成本高</h3>
-                    <p>员工工资、培训、流失和管理成本不断上升，压缩利润空间。</p>
+            <div class="visual-strip">
+                <div class="visual-step-card">
+                    <div class="mini-chart">
+                        <i style="height: 18px;"></i><i style="height: 30px;"></i><i style="height: 24px;"></i><i style="height: 38px;"></i>
+                    </div>
+                    <strong>自动接收</strong>
+                    <span>邮件、表单、微信记录、PDF、图片和表格进入同一个工作台。</span>
                 </div>
-                <div class="card">
-                    <div class="card-icon">⏳</div>
-                    <h3>重复工作多</h3>
-                    <p>邮件、文件、报表、录入每天都在消耗团队精力，无法聚焦核心业务。</p>
+                <div class="visual-step-card">
+                    <div class="mini-chart">
+                        <i style="height: 35px;"></i><i style="height: 20px;"></i><i style="height: 34px;"></i><i style="height: 28px;"></i>
+                    </div>
+                    <strong>自动整理</strong>
+                    <span>AI 提取关键信息，检查缺失项，更新客户或项目状态。</span>
                 </div>
-                <div class="card">
-                    <div class="card-icon">🤯</div>
-                    <h3>老板被琐事拖住</h3>
-                    <p>太多小决定、小任务影响真正重要的经营决策和战略规划。</p>
+                <div class="visual-step-card">
+                    <div class="mini-chart">
+                        <i style="height: 16px;"></i><i style="height: 22px;"></i><i style="height: 40px;"></i><i style="height: 31px;"></i>
+                    </div>
+                    <strong>自动提醒</strong>
+                    <span>只有过期、等待太久、报价未确认、库存低等异常被推出来。</span>
                 </div>
-                <div class="card">
-                    <div class="card-icon">📉</div>
-                    <h3>获客效率不足</h3>
-                    <p>内容、广告、客户跟进没有系统化执行，增长缓慢。</p>
+                <div class="visual-step-card">
+                    <div class="mini-chart">
+                        <i style="height: 28px;"></i><i style="height: 32px;"></i><i style="height: 36px;"></i><i style="height: 42px;"></i>
+                    </div>
+                    <strong>人工确认</strong>
+                    <span>律师、老板或负责人只处理需要判断和授权的下一步。</span>
                 </div>
             </div>
         </div>
@@ -627,6 +1072,36 @@
                 <h2>RONIC 帮你招聘 AI 数字员工</h2>
                 <p class="mb-4">AI 数字员工不是普通聊天机器人，它是被训练去完成具体岗位工作的专业助手。</p>
                 <p style="font-weight: 600; color: var(--primary-color);">你的企业不一定需要更多真人员工，但一定需要更多“完成工作的能力”。</p>
+            </div>
+
+            <div class="role-board">
+                <div class="role-board-head">
+                    <div>
+                        <strong>AI team workflow</strong>
+                        <span>输入进来后，AI 先整理、检查、跟进，再把关键问题交给人。</span>
+                    </div>
+                    <div class="console-status">42 tasks completed today</div>
+                </div>
+                <div class="role-board-grid">
+                    <div class="role-lane">
+                        <div class="lane-title">Incoming work</div>
+                        <div class="work-ticket"><strong>Client documents</strong><span>PDF, passport, invoice, form upload</span></div>
+                        <div class="work-ticket"><strong>Customer enquiry</strong><span>WeChat, email, website form</span></div>
+                        <div class="work-ticket"><strong>Supplier update</strong><span>Price list, stock, ETA</span></div>
+                    </div>
+                    <div class="role-lane">
+                        <div class="lane-title">AI employees working</div>
+                        <div class="work-ticket"><strong>Document reviewer</strong><span>Checks missing files, expiry dates and format issues</span></div>
+                        <div class="work-ticket"><strong>Case coordinator</strong><span>Tracks waiting time, reminders and next actions</span></div>
+                        <div class="work-ticket"><strong>Operations assistant</strong><span>Updates project status, purchase needs and delivery milestones</span></div>
+                    </div>
+                    <div class="role-lane">
+                        <div class="lane-title">Human decision</div>
+                        <div class="work-ticket"><strong>3 need review</strong><span>Risk or business decision required</span></div>
+                        <div class="work-ticket"><strong>5 ready to send</strong><span>Messages prepared for approval</span></div>
+                        <div class="work-ticket"><strong>1 blocked</strong><span>Waiting for client confirmation</span></div>
+                    </div>
+                </div>
             </div>
 
             <div class="grid-3">
@@ -775,21 +1250,40 @@
     </section>
 
     <!-- Case Studies -->
-    <section class="section">
+    <section id="case-studies" class="section">
         <div class="container">
             <div class="text-center mb-12">
                 <h2>真实业务案例：AI 员工不是聊天，而是在跟进流程</h2>
                 <p>每个行业的重复工作不同。RONIC 会把 AI 员工训练成理解你业务节点、文件、客户状态和下一步动作的执行团队。</p>
             </div>
 
-            <div class="case-hero">
-                <picture>
-                    <source srcset="assets/case-studies-workflow.webp" type="image/webp">
-                    <img src="assets/case-studies-workflow.png" alt="RONIC AI workflow scenes for migration law, showroom projects and product supply management">
-                </picture>
-                <div class="case-hero-caption">
-                    <h3>从客户资料、项目排期到采购订单</h3>
-                    <p>AI 员工把分散在表格、邮件、微信、PDF、报价单和供应商信息里的工作，整理成可追踪的状态流。</p>
+            <div class="case-operating-board">
+                <div class="case-board-head">
+                    <div>
+                        <strong>Three operating systems, one method</strong>
+                        <span>把业务拆成状态、责任人、等待时间、风险和下一步动作。</span>
+                    </div>
+                    <div class="console-status">Live demo structure</div>
+                </div>
+                <div class="case-board-grid">
+                    <div class="case-board-column">
+                        <div class="lane-title">Migration lawyers</div>
+                        <div class="timeline-node"><strong>New enquiry</strong><span>Chinese profile form sent</span></div>
+                        <div class="timeline-node"><strong>Documents returned</strong><span>AI checks missing evidence</span></div>
+                        <div class="timeline-node"><strong>Lawyer review</strong><span>Risk pack prepared</span></div>
+                    </div>
+                    <div class="case-board-column">
+                        <div class="lane-title">SOQOO projects</div>
+                        <div class="timeline-node"><strong>Dimensions confirmed</strong><span>Quote and design details locked</span></div>
+                        <div class="timeline-node"><strong>Factory schedule</strong><span>Production and sea freight tracked</span></div>
+                        <div class="timeline-node"><strong>Install booking</strong><span>Delivery team and client time aligned</span></div>
+                    </div>
+                    <div class="case-board-column">
+                        <div class="lane-title">Bricks Power supply</div>
+                        <div class="timeline-node"><strong>SKU health check</strong><span>Fast sellers and low stock flagged</span></div>
+                        <div class="timeline-node"><strong>Supplier comparison</strong><span>Price, MOQ and lead time compared</span></div>
+                        <div class="timeline-node"><strong>Purchase order draft</strong><span>Replenishment list prepared</span></div>
+                    </div>
                 </div>
             </div>
 
