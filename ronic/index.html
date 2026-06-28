@@ -653,7 +653,7 @@
             display: grid;
             grid-template-columns: 1.05fr 0.95fr;
             gap: 36px;
-            align-items: stretch;
+            align-items: start;
         }
 
         .story-card,
@@ -669,6 +669,34 @@
             padding: 34px;
         }
 
+        .story-lead {
+            font-size: 1.22rem;
+            line-height: 1.78;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 1.3rem;
+        }
+
+        .story-card p {
+            font-size: 1.02rem;
+            line-height: 1.82;
+        }
+
+        .empathy-panel {
+            margin: 26px 0;
+            padding: 24px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, #f8fafc, #eef6ff);
+            border: 1px solid var(--border-color);
+        }
+
+        .empathy-panel strong {
+            display: block;
+            color: var(--primary-color);
+            font-size: 1.08rem;
+            margin-bottom: 8px;
+        }
+
         .story-timeline {
             display: grid;
             gap: 18px;
@@ -677,7 +705,7 @@
 
         .story-step {
             display: grid;
-            grid-template-columns: 92px 1fr;
+            grid-template-columns: 120px 1fr;
             gap: 18px;
             padding-top: 18px;
             border-top: 1px solid var(--border-color);
@@ -690,6 +718,7 @@
         .founder-grid {
             display: grid;
             gap: 18px;
+            align-content: start;
         }
 
         .founder-card {
@@ -698,6 +727,10 @@
             grid-template-columns: 84px 1fr;
             gap: 18px;
             align-items: center;
+        }
+
+        .founder-card p {
+            line-height: 1.72;
         }
 
         .photo-placeholder {
@@ -1455,27 +1488,40 @@
         <div class="container">
             <div class="text-center mb-12">
                 <h2>为什么我们要做 RONIC？</h2>
-                <p>我们不是从 AI 技术出发，而是从中小企业老板真实的经营困境出发。</p>
+                <p>我们不是从 AI 技术出发，而是从澳洲中小企业老板每天真实面对的压力出发。</p>
             </div>
 
             <div class="about-grid">
                 <div class="story-card">
-                    <h3>我们是一步一步走到这里的</h3>
-                    <p>Roy 和 Nic 做 digital marketing 已经 15 年。疫情之后，商业行为模式发生了很大变化，我们也选择进入实体零售业，亲自面对库存、客户、员工、系统、供应链和现金流。</p>
-                    <p>这段经历让我们看到一个反复出现的问题：很多澳洲中小企业不是没有机会，而是被人工成本、非标准流程、软件割裂和定制系统成本困在原地。</p>
+                    <h3>我们也是从一个普通生意开始，慢慢看懂这个问题的</h3>
+                    <p class="story-lead">做了 15 年 digital marketing 之后，我们原本以为自己最懂增长：流量、广告、内容、转化、客户跟进。但真正进入实体零售以后，我们才发现，很多生意不是输在没有机会，而是输在每天被运营细节一点点拖住。</p>
+                    <p>疫情之后，客户购买方式变了，员工招聘更难了，租金、工资、物流、库存和供应链成本都在往上走。老板每天很忙，但忙的不一定是最重要的事：一个客户没跟进，一份报价忘了改，一个供应商价格没更新，一批货到了没人及时安排，一个员工离职后流程又断掉。</p>
+                    <p>我们自己做实体生意的时候，也经历过这种感觉：不是不努力，而是每件事都需要人盯；不是不想系统化，而是现成软件太死，定制系统又太贵、太慢；不是不知道问题在哪里，而是没有足够的人和时间把问题持续解决。</p>
+
+                    <div class="empathy-panel">
+                        <strong>很多澳洲中小企业老板真正的困境是：</strong>
+                        <p>你知道生意可以做得更好，但你不能无限加人；你知道流程应该更标准，但你的业务又不像大公司那样整齐；你知道软件应该帮你，但很多软件最后变成了另一件需要管理的事。</p>
+                    </div>
+
+                    <p>后来 AI 变成熟了，我们没有先拿它去做一个“炫技产品”。我们先把 AI 放进自己的其他生意里，让它处理文件、整理产品、跟进客户、检查库存、准备报告。真正让我们兴奋的，不是 AI 会聊天，而是它终于可以让中小企业用更轻的方式拥有过去只有大公司才负担得起的系统能力。</p>
+                    <p>RONIC 就是在这个过程中长出来的。我们想做的不是卖软件，也不是让老板学习复杂工具。我们想帮澳洲中小企业持续改善经营：先发现一个真实问题，再解决一个真实问题，最后让企业一点一点拥有自己的 AI 执行团队。</p>
 
                     <div class="story-timeline">
                         <div class="story-step">
-                            <strong>15 年前</strong>
-                            <div>从 digital marketing 开始，帮助企业获客、转化和增长。</div>
+                            <strong>15 年营销经验</strong>
+                            <div>我们从获客、转化和增长开始，长期服务企业，也看过很多老板最真实的增长焦虑。</div>
                         </div>
                         <div class="story-step">
-                            <strong>疫情之后</strong>
-                            <div>商业行为改变，我们进入实体零售，真正体验中小企业每天的运营压力。</div>
+                            <strong>进入实体生意</strong>
+                            <div>疫情后商业行为改变，我们亲自进入零售和供应链，真正体验人工、库存、系统和现金流压力。</div>
                         </div>
                         <div class="story-step">
-                            <strong>现在</strong>
-                            <div>AI 终于让高质量定制系统变得更快、更轻、更适合中小企业。</div>
+                            <strong>AI 落地之后</strong>
+                            <div>我们先在自己的业务中植入 AI，确认它能真正减少重复工作、暴露问题、推动下一步。</div>
+                        </div>
+                        <div class="story-step">
+                            <strong>现在的 RONIC</strong>
+                            <div>我们把这套方法产品化，帮助更多澳洲中小企业用 AI 发现机会、证明价值、持续改变。</div>
                         </div>
                     </div>
                 </div>
@@ -1485,14 +1531,14 @@
                         <div class="photo-placeholder">Roy<br>Photo</div>
                         <div>
                             <h3>Roy</h3>
-                            <p>Digital marketing、业务增长和实体零售经营经验。负责把老板的问题拆成可执行的 AI 改善机会。</p>
+                            <p>15 年 digital marketing 和业务增长经验，也亲自经历实体零售的运营压力。Roy 更关心的不是“AI 能做什么”，而是老板现在最痛、最值得先解决的问题是什么。</p>
                         </div>
                     </div>
                     <div class="founder-card">
                         <div class="photo-placeholder">Nic<br>Photo</div>
                         <div>
                             <h3>Nic</h3>
-                            <p>业务系统、运营流程和 AI 交付设计。负责把真实工作流变成企业可以每天使用的 AI 执行系统。</p>
+                            <p>负责业务系统、运营流程和 AI 交付设计，把混在邮件、表格、微信、文件和员工经验里的真实工作，整理成企业每天都能使用的 AI 执行系统。</p>
                         </div>
                     </div>
                     <div class="quote-card">
